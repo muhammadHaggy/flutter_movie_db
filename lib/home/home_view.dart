@@ -1,16 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_movie_db/details/detail_view.dart';
 import 'package:flutter_movie_db/utils/fetch_data.dart';
 import 'package:http/http.dart';
 
-import 'detail_model.dart';
+import '../models/detail_model.dart';
 
 class MovieCard extends StatelessWidget {
+  final String titleStartsWith;
+  const MovieCard({super.key, required this.titleStartsWith});
+
   Future<List<Result>> getSeries() async {
-    return await fetchSeries({'limit': '5', 'titleStartsWith': 'avenger'});
+    return await fetchSeries(
+        {'limit': '10', 'titleStartsWith': titleStartsWith});
   }
 
   @override
   Widget build(BuildContext context) {
+    // return FutureBuilder(
+    //     future: getSeries(),
+    //     builder: (context, snapshot) {
+    //       if (!snapshot.hasData) {
+    //         return Container();
+    //       }
+    //       final values = snapshot.data!;
+
+    //       return ElevatedButton(onPressed: testt, child: Text('test'));
+    //     });
     return FutureBuilder(
         future: getSeries(),
         builder: (context, asyncSnapshot) {
@@ -18,6 +33,14 @@ class MovieCard extends StatelessWidget {
             return Container();
           }
           final values = asyncSnapshot.data!;
+          void onTap(Result series) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => MovieDetailScreenWidget(
+                        key: UniqueKey(), series: series)));
+          }
+
           return SizedBox(
             height: 310,
             child: ListView.builder(
@@ -32,7 +55,7 @@ class MovieCard extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: InkWell(
                       onTap: () {
-                        // onTap();
+                        onTap(series);
                       },
                       child: Container(
                         constraints: const BoxConstraints(minHeight: 280),
