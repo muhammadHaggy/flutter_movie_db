@@ -1,3 +1,4 @@
+import 'package:flutter_movie_db/models/detail_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'User.g.dart';
@@ -6,17 +7,22 @@ part 'User.g.dart';
 class User {
   String imagePath;
   String name;
-  String email;
+  String shortName;
+  String jurusanAngkatan;
+  String hobi;
+  String mediaSosial;
   String about;
   bool isDarkMode;
 
-  User({
-    required this.imagePath,
-    required this.name,
-    required this.email,
-    required this.about,
-    required this.isDarkMode,
-  });
+  User(
+      {required this.imagePath,
+      required this.name,
+      required this.about,
+      required this.isDarkMode,
+      required this.hobi,
+      required this.jurusanAngkatan,
+      required this.mediaSosial,
+      required this.shortName});
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 

@@ -9,15 +9,21 @@ part of 'User.dart';
 User _$UserFromJson(Map<String, dynamic> json) => User(
       imagePath: json['imagePath'] as String,
       name: json['name'] as String,
-      email: json['email'] as String,
       about: json['about'] as String,
       isDarkMode: json['isDarkMode'] as bool,
+      hobi: json['hobi'] as String,
+      jurusanAngkatan: json['jurusanAngkatan'] as String,
+      mediaSosial: json['mediaSosial'] as String,
+      shortName: json['shortName'] as String,
     );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'imagePath': instance.imagePath,
       'name': instance.name,
-      'email': instance.email,
+      'shortName': instance.shortName,
+      'jurusanAngkatan': instance.jurusanAngkatan,
+      'hobi': instance.hobi,
+      'mediaSosial': instance.mediaSosial,
       'about': instance.about,
       'isDarkMode': instance.isDarkMode,
     };

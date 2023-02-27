@@ -18,9 +18,13 @@ class EditProfilePage extends StatefulWidget {
 class _EditProfilePageState extends State<EditProfilePage> {
   late SharedPreferences sharedPreferences;
   User? _user;
+  final imagePathController = TextEditingController();
   final nameController = TextEditingController();
-  final emailController = TextEditingController();
+  final shortNameController = TextEditingController();
+  final mediaSosialController = TextEditingController();
   final aboutController = TextEditingController();
+  final hobiController = TextEditingController();
+  final jurusanAngkatanController = TextEditingController();
 
   @override
   void initState() {
@@ -33,24 +37,36 @@ class _EditProfilePageState extends State<EditProfilePage> {
       // will be null if never previously saved
       if (userString == null) {
         _user = User(
-            imagePath:
-                "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=333&q=80",
-            name: "Haggy",
-            email: "hagyyuwan4@gm.com",
-            about: "Speedrun 3 hari gasssss",
-            isDarkMode: true);
+          imagePath:
+              "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=333&q=80",
+          name: "Haggy",
+          about: "Speedrun 3 hari gasssss",
+          isDarkMode: true,
+          hobi: 'makan',
+          jurusanAngkatan: 'ilkom 21',
+          mediaSosial: 'muhammadhaggy (line)',
+          shortName: 'Hagi',
+        );
+        imagePathController.text = _user!.imagePath;
         nameController.text = _user!.name;
-        emailController.text = _user!.email;
         aboutController.text = _user!.about;
+        shortNameController.text = _user!.shortName;
+        jurusanAngkatanController.text = _user!.jurusanAngkatan;
+        hobiController.text = _user!.hobi;
+        mediaSosialController.text = _user!.hobi;
         String userString = jsonEncode(_user);
         sharedPreferences.setString('user', userString);
         setState(() {});
       } else {
         Map decodeOptions = jsonDecode(userString);
         _user = User.fromJson(decodeOptions as Map<String, dynamic>);
+        imagePathController.text = _user!.imagePath;
         nameController.text = _user!.name;
-        emailController.text = _user!.email;
         aboutController.text = _user!.about;
+        shortNameController.text = _user!.shortName;
+        jurusanAngkatanController.text = _user!.jurusanAngkatan;
+        hobiController.text = _user!.hobi;
+        mediaSosialController.text = _user!.hobi;
         setState(() {});
       }
     });
@@ -60,8 +76,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
   void dispose() {
     // Clean up the controller when the widget is disposed.
     nameController.dispose();
-    emailController.dispose();
+    imagePathController.dispose();
     aboutController.dispose();
+    shortNameController.dispose();
+    jurusanAngkatanController.dispose();
+    hobiController.dispose();
+    mediaSosialController.dispose();
     super.dispose();
   }
 
@@ -74,6 +94,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) => Builder(builder: (context) {
         return Scaffold(
+          backgroundColor: Colors.black,
           appBar: AppBar(
             backgroundColor: const Color(0x44000000),
           ),
@@ -83,28 +104,47 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   padding: const EdgeInsets.symmetric(horizontal: 32),
                   physics: const BouncingScrollPhysics(),
                   children: [
-                    ProfileWidget(
-                      imagePath: _user!.imagePath,
-                      isEdit: true,
-                      onClicked: () async {},
+                    const SizedBox(height: 24),
+                    TextFieldWidget(
+                      controller: imagePathController,
+                      label: 'Profile Image Url',
+                      text: _user!.imagePath,
+                      onChanged: (imagePath) {},
                     ),
                     const SizedBox(height: 24),
                     TextFieldWidget(
                       controller: nameController,
                       label: 'Full Name',
                       text: _user!.name,
-                      onChanged: (name) {
-                        _user!.name = name;
-                      },
+                      onChanged: (name) {},
                     ),
                     const SizedBox(height: 24),
                     TextFieldWidget(
-                      controller: emailController,
-                      label: 'Email',
-                      text: _user!.email,
-                      onChanged: (email) {
-                        _user!.email = email;
-                      },
+                      controller: shortNameController,
+                      label: 'Nama Panggilan',
+                      text: _user!.shortName,
+                      onChanged: (name) {},
+                    ),
+                    const SizedBox(height: 24),
+                    TextFieldWidget(
+                      controller: jurusanAngkatanController,
+                      label: 'Jurusan-angkatan',
+                      text: _user!.jurusanAngkatan,
+                      onChanged: (name) {},
+                    ),
+                    const SizedBox(height: 24),
+                    TextFieldWidget(
+                      controller: hobiController,
+                      label: 'Hobi',
+                      text: _user!.hobi,
+                      onChanged: (hobi) {},
+                    ),
+                    const SizedBox(height: 24),
+                    TextFieldWidget(
+                      controller: mediaSosialController,
+                      label: 'Media Sosial',
+                      text: _user!.mediaSosial,
+                      onChanged: (mediaSosial) {},
                     ),
                     const SizedBox(height: 24),
                     TextFieldWidget(
@@ -112,9 +152,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       label: 'About',
                       text: _user!.about,
                       maxLines: 5,
-                      onChanged: (about) {
-                        _user!.about = about;
-                      },
+                      onChanged: (about) {},
                     ),
                     const SizedBox(height: 24),
                     Center(
@@ -122,11 +160,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             text: "Simpan",
                             onClicked: (() {
                               saveUser(User(
-                                  imagePath: _user!.imagePath,
-                                  name: nameController.text,
-                                  email: emailController.text,
-                                  about: aboutController.text,
-                                  isDarkMode: true));
+                                imagePath: imagePathController.text,
+                                name: nameController.text,
+                                about: aboutController.text,
+                                isDarkMode: true,
+                                hobi: hobiController.text,
+                                jurusanAngkatan: jurusanAngkatanController.text,
+                                mediaSosial: mediaSosialController.text,
+                                shortName: shortNameController.text,
+                              ));
                             }))),
                   ],
                 ),
