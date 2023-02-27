@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_db/constants.dart';
 import 'package:flutter_movie_db/home/home_view.dart';
-import 'package:flutter_movie_db/profile/edit_profile_view.dart';
 import 'package:flutter_movie_db/profile/profile_view.dart';
 
 import 'widgets/header_text.dart';
@@ -32,7 +31,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      home: Home(),
+      home: const Home(),
 
       // home: MovieCard(titleStartsWith: 'avenger'),
     );
@@ -56,7 +55,7 @@ class Home extends StatelessWidget {
           // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             ListTile(
@@ -68,10 +67,10 @@ class Home extends StatelessWidget {
                 // Update the state of the app.
                 // ...
                 Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => Home()));
+                    MaterialPageRoute(builder: (context) => const Home()));
               },
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             ListTile(
@@ -91,19 +90,19 @@ class Home extends StatelessWidget {
       ),
       backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Color(0x44000000),
+        backgroundColor: const Color(0x44000000),
       ),
       body: SingleChildScrollView(
           child: Column(
-        children: [
-          const HeaderText(text: "Top Rated"),
+        children: const [
+          HeaderText(text: "Top Rated"),
           MovieCard(
             titleStartsWith: 'avengers',
           ),
-          const SizedBox(
+          SizedBox(
             height: 14,
           ),
-          const HeaderText(text: "Trending"),
+          HeaderText(text: "Trending"),
           MovieCard(
             titleStartsWith: 'iron',
           )
