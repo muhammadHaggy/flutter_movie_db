@@ -5,7 +5,6 @@ import 'package:flutter_movie_db/widgets/button_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/User.dart';
-import '../widgets/profile_widget.dart';
 import '../widgets/text_field.dart';
 
 class EditProfilePage extends StatefulWidget {

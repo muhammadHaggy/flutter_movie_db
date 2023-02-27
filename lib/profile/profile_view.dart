@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constants.dart';
@@ -151,7 +150,7 @@ class _ProfilePageState extends State<ProfilePage> {
           children: [
             Text(
               headerText,
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: Colors.white),

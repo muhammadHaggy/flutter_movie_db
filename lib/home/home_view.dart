@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_db/details/detail_view.dart';
 import 'package:flutter_movie_db/utils/fetch_data.dart';
-import 'package:http/http.dart';
 
 import '../models/detail_model.dart';
 
@@ -45,7 +44,7 @@ class MovieCard extends StatelessWidget {
             height: 310,
             child: ListView.builder(
                 shrinkWrap: true,
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 itemCount: values.length,
                 itemBuilder: (context, index) {
@@ -71,9 +70,8 @@ class MovieCard extends StatelessWidget {
                               ),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
-                                child: Image.network(series.thumbnail.path +
-                                    '.' +
-                                    series.thumbnail.extension),
+                                child: Image.network(
+                                    '${series.thumbnail.path}.${series.thumbnail.extension}'),
                               ),
                             ),
                             const SizedBox(height: 10),
@@ -87,15 +85,13 @@ class MovieCard extends StatelessWidget {
                                     series.title,
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(color: Colors.white),
+                                    style: const TextStyle(color: Colors.white),
                                   ),
                                   Text(
-                                    series.startYear.toString() +
-                                        '-' +
-                                        series.endYear.toString(),
+                                    '${series.startYear}-${series.endYear}',
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(color: Colors.white),
+                                    style: const TextStyle(color: Colors.white),
                                   ),
                                 ],
                               ),

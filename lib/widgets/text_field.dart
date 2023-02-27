@@ -27,12 +27,12 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         children: [
           Text(
             widget.label,
-            style: TextStyle(
+            style: const TextStyle(
                 fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
           ),
           const SizedBox(height: 8),
           TextField(
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
             controller: widget.controller,
             decoration: InputDecoration(
               filled: true,

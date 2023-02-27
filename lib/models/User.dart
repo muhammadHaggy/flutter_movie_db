@@ -1,4 +1,3 @@
-import 'package:flutter_movie_db/models/detail_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'User.g.dart';
