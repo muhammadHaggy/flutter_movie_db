@@ -19,6 +19,7 @@ class MovieDetailScreenWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // return Container();
+    var nextInt = Random().nextInt(5);
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -32,7 +33,6 @@ class MovieDetailScreenWidget extends StatelessWidget {
         child: Container(
           color: Colors.black.withOpacity(.5),
           child: Stack(
-            // physics: BouncingScrollPhysics(),
             children: [
               Stack(
                 children: [
@@ -150,30 +150,29 @@ class MovieDetailScreenWidget extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                // RichText(
-                                //   text: TextSpan(
-                                //     children: [
-                                //       TextSpan(
-                                //         text: series.title,
-                                //         style: heading.copyWith(fontSize: 22),
-                                //       ),
-                                //       TextSpan(
-                                //         text: series.startYear.toString(),
-                                //         style: heading.copyWith(
-                                //           color: Colors.white.withOpacity(.8),
-                                //           fontSize: 18,
-                                //         ),
-                                //       ),
-                                //     ],
-                                //   ),
-                                // ),
-                                // const SizedBox(height: 5),
-                                // Text(
-                                //   series.type,
-                                //   style:
-                                //       normalText.copyWith(color: Colors.white),
-                                // ),
-                                // const SizedBox(height: 5),
+                                RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: series.title,
+                                        style: heading.copyWith(
+                                            fontSize: 22, color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(height: 5),
+                                Text(
+                                  series.type,
+                                  style:
+                                      normalText.copyWith(color: Colors.white),
+                                ),
+                                const SizedBox(height: 5),
+                                Text(
+                                  series.description.toString(),
+                                  style:
+                                      normalText.copyWith(color: Colors.white),
+                                ),
                                 Row(
                                   children: [
                                     IconTheme(
@@ -182,11 +181,11 @@ class MovieDetailScreenWidget extends StatelessWidget {
                                         size: 20,
                                       ),
                                       child: StarDisplay(
-                                        value: (Random().nextInt(5)).round(),
+                                        value: (nextInt).round(),
                                       ),
                                     ),
                                     Text(
-                                      "  ${series.rating}",
+                                      "  ${nextInt.round()}",
                                       style: normalText.copyWith(
                                         color: Colors.amber,
                                         letterSpacing: 1.2,
@@ -203,11 +202,6 @@ class MovieDetailScreenWidget extends StatelessWidget {
                                 //   type: 'MOVIE',
                                 //   date: info.releaseDate,
                                 // ),
-                                Text(
-                                  series.description.toString(),
-                                  style:
-                                      normalText.copyWith(color: Colors.white),
-                                )
                               ],
                             ),
                           ),

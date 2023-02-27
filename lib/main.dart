@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_movie_db/constants.dart';
 import 'package:flutter_movie_db/home/home_view.dart';
+import 'package:flutter_movie_db/profile/edit_profile_view.dart';
+import 'package:flutter_movie_db/profile/profile_view.dart';
 
 import 'widgets/header_text.dart';
 
@@ -45,6 +48,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Drawer(
+        backgroundColor: Colors.black54,
         // Add a ListView to the drawer. This ensures the user can scroll
         // through the options in the drawer if there isn't enough vertical
         // space to fit everything.
@@ -52,14 +56,14 @@ class Home extends StatelessWidget {
           // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
           children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text('Drawer Header'),
+            SizedBox(
+              height: 20,
             ),
             ListTile(
-              title: const Text('Home'),
+              title: Text(
+                'Home',
+                style: normalText.copyWith(color: Colors.white),
+              ),
               onTap: () {
                 // Update the state of the app.
                 // ...
@@ -67,11 +71,19 @@ class Home extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => Home()));
               },
             ),
+            SizedBox(
+              height: 10,
+            ),
             ListTile(
-              title: const Text('Item 2'),
+              title: Text(
+                'Profile',
+                style: normalText.copyWith(color: Colors.white),
+              ),
               onTap: () {
                 // Update the state of the app.
                 // ...
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => ProfilePage()));
               },
             ),
           ],
