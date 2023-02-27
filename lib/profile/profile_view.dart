@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../models/user_model.dart';
+import '../models/User.dart';
 import '../widgets/profile_widget.dart';
 import 'edit_profile_view.dart';
 

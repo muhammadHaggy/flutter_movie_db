@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_movie_db/widgets/button_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../models/user_model.dart';
+import '../models/User.dart';
 import '../widgets/profile_widget.dart';
 import '../widgets/text_field.dart';
 
@@ -48,6 +48,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
       } else {
         Map decodeOptions = jsonDecode(userString);
         _user = User.fromJson(decodeOptions as Map<String, dynamic>);
+        nameController.text = _user!.name;
+        emailController.text = _user!.email;
+        aboutController.text = _user!.about;
         setState(() {});
       }
     });
