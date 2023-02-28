@@ -48,61 +48,6 @@ class MovieDetailScreenWidget extends StatelessWidget {
                               color: Colors.white,
                             ),
                           ),
-                          CreateIcons(
-                            onTap: () {
-                              showModalBottomSheet<void>(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                backgroundColor:
-                                    const Color.fromARGB(255, 30, 34, 45),
-                                context: context,
-                                builder: (BuildContext ctx) {
-                                  return Container(
-                                    color: Colors.black26,
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        const SizedBox(
-                                          height: 14,
-                                        ),
-                                        Container(
-                                          height: 5,
-                                          width: 100,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 20,
-                                        ),
-                                        Column(
-                                          children: [
-                                            CopyLink(
-                                              title: series.title,
-                                              id: series.id.toString(),
-                                              type: 'movie',
-                                            ),
-                                            Divider(
-                                              height: .5,
-                                              thickness: .5,
-                                              color: Colors.grey.shade800,
-                                            )
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                },
-                              );
-                            },
-                            child: const Icon(
-                              CupertinoIcons.ellipsis,
-                              color: Colors.white,
-                            ),
-                          ),
                         ],
                       ),
                     ),
