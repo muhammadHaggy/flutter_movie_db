@@ -243,7 +243,7 @@ class MovieDetailScreenWidget extends StatelessWidget {
                                   color: Colors.white, fontSize: 16),
                             ),
                             subtitle: Text(
-                              movie.popularity.toString(),
+                              movie.adult ? "18+" : "12+",
                               style: normalText.copyWith(color: Colors.white),
                             )),
                       ],
