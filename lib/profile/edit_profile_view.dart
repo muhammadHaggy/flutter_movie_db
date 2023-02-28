@@ -53,8 +53,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
         jurusanAngkatanController.text = _user!.jurusanAngkatan;
         hobiController.text = _user!.hobi;
         mediaSosialController.text = _user!.hobi;
-        String userString = jsonEncode(_user);
-        sharedPreferences.setString('user', userString);
+        String jsonString = jsonEncode(_user);
+        sharedPreferences.setString('user', jsonString);
         setState(() {});
       } else {
         Map decodeOptions = jsonDecode(userString);
