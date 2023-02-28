@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_movie_db/profile/profile_view.dart';
 import 'package:flutter_movie_db/widgets/button_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -95,6 +96,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
         return Scaffold(
           backgroundColor: Colors.black,
           appBar: AppBar(
+            // leading: BackButton(
+            //   onPressed: () => Navigator.of(context).pushReplacement(
+            //       MaterialPageRoute(builder: ((context) => ProfilePage()))),
+            // ),
             backgroundColor: const Color(0x44000000),
           ),
           body: _user == null
@@ -168,6 +173,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 mediaSosial: mediaSosialController.text,
                                 shortName: shortNameController.text,
                               ));
+                              Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                      builder: ((context) => ProfilePage())));
                             }))),
                   ],
                 ),
