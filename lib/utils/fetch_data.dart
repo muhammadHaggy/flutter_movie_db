@@ -1,4 +1,4 @@
-import 'package:flutter_movie_db/models/detail_model.dart';
+import 'package:flutter_movie_db/models/response_model.dart';
 import 'package:http/http.dart' as http;
 
 Uri constructUri(String apiEndpoint, Map<String, String> queryParameters) {

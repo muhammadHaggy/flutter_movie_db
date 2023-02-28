@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
-import '../models/detail_model.dart';
+import '../models/response_model.dart';
 import '../widgets/bottom_info_sheet.dart';
 import '../widgets/copy_link.dart';
 import '../widgets/expandeable_group.dart';

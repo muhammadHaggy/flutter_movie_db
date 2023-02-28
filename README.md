@@ -1,16 +1,14 @@
-# flutter_movie_db
+# Flutter Movie Database
 
-A new Flutter project.
+Movie Database adalah aplikasi yang menampilkan film-film trending dan terkini.
 
-## Getting Started
+App ini dapat menampilkan film trending dan terkini. Terdapat fitur profile yang menampilkan informasi user seperti nama lengkap, nama panggilan, hobi, dan lain-lain. Informasi ini dapat diedit dan disimpan dalam memori device, termasuk profile photo dengan menyertakan image url pada edit profile page.
 
-This project is a starting point for a Flutter application.
+App ini menggunakan package json_serializable untuk mempermudah serialization dan deserialization secara otomatis.
 
-A few resources to get you started if this is your first Flutter project:
+App ini menggunakan package json_annotation untuk menggunakan annotation @JsonSerializable pada object class agak diconvert oleh package json_serializable menjadi object yang dapat diserialisasi dengan mudah.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+App ini menggunakan sharedpreference untuk menyimpan object user di dalam memory perangkat. object user disimpan dalam bentuk json string.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+

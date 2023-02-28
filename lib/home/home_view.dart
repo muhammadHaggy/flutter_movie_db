@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_movie_db/details/detail_view.dart';
 import 'package:flutter_movie_db/utils/fetch_data.dart';
 
-import '../models/detail_model.dart';
+import '../models/response_model.dart';
 
 class MovieCard extends StatelessWidget {
   final String titleStartsWith;
