@@ -4,22 +4,44 @@ import 'package:flutter_movie_db/utils/fetch_data.dart';
 
 import '../models/response_model.dart';
 
-class MovieCard extends StatelessWidget {
+class MovieCard extends StatefulWidget {
   final String titleStartsWith;
-  const MovieCard({super.key, required this.titleStartsWith});
+  MovieCard({super.key, required this.titleStartsWith});
+
+  @override
+  State<MovieCard> createState() => _MovieCardState();
+}
+
+class _MovieCardState extends State<MovieCard> {
+  late Future<List<Result>> _series;
 
   Future<List<Result>> getSeries() async {
     return await fetchSeries(
-        {'limit': '10', 'titleStartsWith': titleStartsWith});
+        {'limit': '10', 'titleStartsWith': widget.titleStartsWith});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _series = getSeries();
+  }
+
+  @override
+  void didUpdateWidget(covariant MovieCard oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+    _series = getSeries();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: getSeries(),
+        future: _series,
         builder: (context, asyncSnapshot) {
           if (!asyncSnapshot.hasData) {
-            return Container();
+            return Container(
+                width: double.infinity,
+                child: Center(child: CircularProgressIndicator()));
           }
           final values = asyncSnapshot.data!;
           void onTap(Result series) {

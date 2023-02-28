@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_db/constants.dart';
-import 'package:flutter_movie_db/home/home_view.dart';
+import 'package:flutter_movie_db/home/movie_card_view.dart';
 import 'package:flutter_movie_db/profile/profile_view.dart';
 
 import 'widgets/header_text.dart';
@@ -94,9 +94,10 @@ class Home extends StatelessWidget {
       ),
       body: SingleChildScrollView(
           child: Column(
-        children: const [
+        children: [
           HeaderText(text: "Top Rated"),
           MovieCard(
+            key: UniqueKey(),
             titleStartsWith: 'avengers',
           ),
           SizedBox(

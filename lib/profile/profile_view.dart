@@ -99,31 +99,33 @@ class _ProfilePageState extends State<ProfilePage> {
         appBar: AppBar(
           backgroundColor: const Color(0x44000000),
         ),
-        body: ListView(
-          physics: const BouncingScrollPhysics(),
-          children: [
-            ProfileWidget(
-              imagePath: _user!.imagePath,
-              onClicked: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                      builder: (context) => const EditProfilePage()),
-                );
-              },
-            ),
-            const SizedBox(height: 24),
-            buildName(_user!),
-            const SizedBox(height: 48),
-            buildTextWidget("Jurusan - Angkatan", _user!.jurusanAngkatan),
-            const SizedBox(height: 24),
-            buildTextWidget("Hobi", _user!.hobi),
-            const SizedBox(height: 24),
-            buildTextWidget("Media Sosial", _user!.mediaSosial),
-            const SizedBox(height: 24),
-            buildTextWidget("About", _user!.about),
-            const SizedBox(height: 48),
-          ],
-        ),
+        body: _user == null
+            ? CircularProgressIndicator()
+            : ListView(
+                physics: const BouncingScrollPhysics(),
+                children: [
+                  ProfileWidget(
+                    imagePath: _user!.imagePath,
+                    onClicked: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => const EditProfilePage()),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 24),
+                  buildName(_user!),
+                  const SizedBox(height: 48),
+                  buildTextWidget("Jurusan - Angkatan", _user!.jurusanAngkatan),
+                  const SizedBox(height: 24),
+                  buildTextWidget("Hobi", _user!.hobi),
+                  const SizedBox(height: 24),
+                  buildTextWidget("Media Sosial", _user!.mediaSosial),
+                  const SizedBox(height: 24),
+                  buildTextWidget("About", _user!.about),
+                  const SizedBox(height: 48),
+                ],
+              ),
       ),
     );
   }
