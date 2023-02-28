@@ -18,7 +18,6 @@ class MovieDetailScreenWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return Container();
     var nextInt = Random().nextInt(5);
     return Scaffold(
       body: Container(
@@ -36,16 +35,6 @@ class MovieDetailScreenWidget extends StatelessWidget {
             children: [
               Stack(
                 children: [
-                  // InkWell(
-                  //   child: SizedBox(
-                  //     height: MediaQuery.of(context).size.height * (1 - 0.63),
-                  //     width: MediaQuery.of(context).size.width,
-                  //     child: CachedNetworkImage(
-                  //       imageUrl: info.backdrops,
-                  //       fit: BoxFit.cover,
-                  //     ),
-                  //   ),
-                  // ),
                   SafeArea(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -194,14 +183,6 @@ class MovieDetailScreenWidget extends StatelessWidget {
                                   ],
                                 ),
                                 const SizedBox(height: 5),
-                                // LikeButton(
-                                //   id: info.tmdbId,
-                                //   title: info.title,
-                                //   rate: info.rateing,
-                                //   poster: info.poster,
-                                //   type: 'MOVIE',
-                                //   date: info.releaseDate,
-                                // ),
                               ],
                             ),
                           ),

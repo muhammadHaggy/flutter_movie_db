@@ -105,6 +105,10 @@ class Home extends StatelessWidget {
           HeaderText(text: "Trending"),
           MovieCard(
             titleStartsWith: 'iron',
+          ),
+          HeaderText(text: "Upcoming"),
+          MovieCard(
+            titleStartsWith: 'thor',
           )
         ],
       )),
