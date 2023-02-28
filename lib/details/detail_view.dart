@@ -102,11 +102,6 @@ class MovieDetailScreenWidget extends StatelessWidget {
                                       normalText.copyWith(color: Colors.white),
                                 ),
                                 const SizedBox(height: 5),
-                                Text(
-                                  series.description.toString(),
-                                  style:
-                                      normalText.copyWith(color: Colors.white),
-                                ),
                                 Row(
                                   children: [
                                     IconTheme(
@@ -135,6 +130,36 @@ class MovieDetailScreenWidget extends StatelessWidget {
                       ],
                     ),
                   ),
+                  if (series.description.runtimeType == String)
+                    ExpandableGroup(
+                      isExpanded: true,
+                      expandedIcon: Icon(
+                        Icons.arrow_drop_up,
+                        color: Colors.white != Colors.white
+                            ? Colors.black
+                            : Colors.white,
+                      ),
+                      collapsedIcon: Icon(
+                        Icons.arrow_drop_down,
+                        color: Colors.white != Colors.white
+                            ? Colors.black
+                            : Colors.white,
+                      ),
+                      header: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                        child: Text(
+                          "Overview",
+                          style: heading.copyWith(color: Colors.white),
+                        ),
+                      ),
+                      items: [
+                        ListTile(
+                            subtitle: Text(
+                          series.description,
+                          style: normalText.copyWith(color: Colors.white),
+                        )),
+                      ],
+                    ),
                   ExpandableGroup(
                     isExpanded: true,
                     expandedIcon: Icon(
