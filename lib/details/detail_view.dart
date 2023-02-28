@@ -3,6 +3,8 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_movie_db/models/movie_model.dart';
+import 'package:flutter_movie_db/utils/create_image_url.dart';
 
 import '../constants.dart';
 import '../models/response_model.dart';
@@ -12,19 +14,17 @@ import '../widgets/expandeable_group.dart';
 import '../widgets/star_display.dart';
 
 class MovieDetailScreenWidget extends StatelessWidget {
-  final Result series;
+  final Movie movie;
 
-  const MovieDetailScreenWidget({super.key, required this.series});
+  const MovieDetailScreenWidget({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {
-    var nextInt = Random().nextInt(5);
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage(
-                '${series.thumbnail.path}.${series.thumbnail.extension}'),
+            image: NetworkImage(createImageUrl(imageLink: movie.posterPath)),
             fit: BoxFit.cover,
             alignment: Alignment.topLeft,
           ),
@@ -55,8 +55,7 @@ class MovieDetailScreenWidget extends StatelessWidget {
                 ],
               ),
               BottomInfoSheet(
-                backdrops:
-                    '${series.thumbnail.path}.${series.thumbnail.extension}',
+                backdrops: createImageUrl(imageLink: movie.backdropPath),
                 child: [
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -72,7 +71,7 @@ class MovieDetailScreenWidget extends StatelessWidget {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8),
                               child: Image.network(
-                                  '${series.thumbnail.path}.${series.thumbnail.extension}'),
+                                  createImageUrl(imageLink: movie.posterPath)),
                             ),
                           ),
                         ),
@@ -88,7 +87,7 @@ class MovieDetailScreenWidget extends StatelessWidget {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                        text: series.title,
+                                        text: movie.title,
                                         style: heading.copyWith(
                                             fontSize: 22, color: Colors.white),
                                       ),
@@ -97,7 +96,7 @@ class MovieDetailScreenWidget extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 5),
                                 Text(
-                                  series.type,
+                                  movie.genre.join(', '),
                                   style:
                                       normalText.copyWith(color: Colors.white),
                                 ),
@@ -110,11 +109,11 @@ class MovieDetailScreenWidget extends StatelessWidget {
                                         size: 20,
                                       ),
                                       child: StarDisplay(
-                                        value: (nextInt).round(),
+                                        value: (movie.voteAverage / 2).round(),
                                       ),
                                     ),
                                     Text(
-                                      "  ${nextInt.round()} / 5",
+                                      "  ${movie.voteAverage.round()} / 10",
                                       style: normalText.copyWith(
                                         color: Colors.amber,
                                         letterSpacing: 1.2,
@@ -130,36 +129,35 @@ class MovieDetailScreenWidget extends StatelessWidget {
                       ],
                     ),
                   ),
-                  if (series.description.runtimeType == String)
-                    ExpandableGroup(
-                      isExpanded: true,
-                      expandedIcon: Icon(
-                        Icons.arrow_drop_up,
-                        color: Colors.white != Colors.white
-                            ? Colors.black
-                            : Colors.white,
-                      ),
-                      collapsedIcon: Icon(
-                        Icons.arrow_drop_down,
-                        color: Colors.white != Colors.white
-                            ? Colors.black
-                            : Colors.white,
-                      ),
-                      header: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                        child: Text(
-                          "Overview",
-                          style: heading.copyWith(color: Colors.white),
-                        ),
-                      ),
-                      items: [
-                        ListTile(
-                            subtitle: Text(
-                          series.description,
-                          style: normalText.copyWith(color: Colors.white),
-                        )),
-                      ],
+                  ExpandableGroup(
+                    isExpanded: true,
+                    expandedIcon: Icon(
+                      Icons.arrow_drop_up,
+                      color: Colors.white != Colors.white
+                          ? Colors.black
+                          : Colors.white,
                     ),
+                    collapsedIcon: Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.white != Colors.white
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                    header: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                      child: Text(
+                        "Overview",
+                        style: heading.copyWith(color: Colors.white),
+                      ),
+                    ),
+                    items: [
+                      ListTile(
+                          subtitle: Text(
+                        movie.overview,
+                        style: normalText.copyWith(color: Colors.white),
+                      )),
+                    ],
+                  ),
                   ExpandableGroup(
                     isExpanded: true,
                     expandedIcon: Icon(
@@ -182,26 +180,26 @@ class MovieDetailScreenWidget extends StatelessWidget {
                       ),
                     ),
                     items: [
-                      ListTile(
-                          title: Text(
-                            "Writers",
-                            style: heading.copyWith(
-                                color: Colors.white, fontSize: 16),
-                          ),
-                          subtitle: Text(
-                            series.creators.items[0].name,
-                            style: normalText.copyWith(color: Colors.white),
-                          )),
-                      ListTile(
-                          title: Text(
-                            "Director",
-                            style: heading.copyWith(
-                                color: Colors.white, fontSize: 16),
-                          ),
-                          subtitle: Text(
-                            series.creators.items[0].name,
-                            style: normalText.copyWith(color: Colors.white),
-                          )),
+                      // ListTile(
+                      //     title: Text(
+                      //       "Writers",
+                      //       style: heading.copyWith(
+                      //           color: Colors.white, fontSize: 16),
+                      //     ),
+                      //     subtitle: Text(
+                      //       series.creators.items[0].name,
+                      //       style: normalText.copyWith(color: Colors.white),
+                      //     )),
+                      // ListTile(
+                      //     title: Text(
+                      //       "Director",
+                      //       style: heading.copyWith(
+                      //           color: Colors.white, fontSize: 16),
+                      //     ),
+                      //     subtitle: Text(
+                      //       series.creators.items[0].name,
+                      //       style: normalText.copyWith(color: Colors.white),
+                      //     )),
                       ListTile(
                           title: Text(
                             "Released on/Releasing on",
@@ -209,7 +207,7 @@ class MovieDetailScreenWidget extends StatelessWidget {
                                 color: Colors.white, fontSize: 16),
                           ),
                           subtitle: Text(
-                            series.startYear.toString(),
+                            movie.releaseDate.toString(),
                             style: normalText.copyWith(color: Colors.white),
                           )),
                     ],
@@ -245,7 +243,7 @@ class MovieDetailScreenWidget extends StatelessWidget {
                                   color: Colors.white, fontSize: 16),
                             ),
                             subtitle: Text(
-                              series.rating,
+                              movie.popularity.toString(),
                               style: normalText.copyWith(color: Colors.white),
                             )),
                       ],
