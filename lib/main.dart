@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_movie_db/constants.dart';
 import 'package:flutter_movie_db/home/movie_card_view.dart';
 import 'package:flutter_movie_db/profile/profile_view.dart';
+import 'package:flutter_movie_db/utils/fetch_data.dart';
 
 import 'widgets/header_text.dart';
 
@@ -99,17 +100,22 @@ class Home extends StatelessWidget {
           MovieCard(
             key: UniqueKey(),
             titleStartsWith: 'avengers',
+            getMovies: TMDBApi.fetchTopRatedMovies,
           ),
           SizedBox(
             height: 14,
           ),
-          HeaderText(text: "Trending"),
+          HeaderText(text: "Popular"),
           MovieCard(
+            key: UniqueKey(),
             titleStartsWith: 'iron',
+            getMovies: TMDBApi.fetchPopularMovies,
           ),
           HeaderText(text: "Upcoming"),
           MovieCard(
+            key: UniqueKey(),
             titleStartsWith: 'thor',
+            getMovies: TMDBApi.fetchUpcomingMovies,
           )
         ],
       )),

@@ -1,42 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_db/details/detail_view.dart';
+import 'package:flutter_movie_db/models/movie_model.dart';
+import 'package:flutter_movie_db/utils/create_image_url.dart';
 import 'package:flutter_movie_db/utils/fetch_data.dart';
 
 import '../models/response_model.dart';
 
 class MovieCard extends StatefulWidget {
   final String titleStartsWith;
-  MovieCard({super.key, required this.titleStartsWith});
+  final Future<List<Movie>> Function(int) getMovies;
+  MovieCard(
+      {super.key, required this.titleStartsWith, required this.getMovies});
 
   @override
   State<MovieCard> createState() => _MovieCardState();
 }
 
 class _MovieCardState extends State<MovieCard> {
-  late Future<List<Result>> _series;
+  late Future<List<Movie>> _movies;
 
-  Future<List<Result>> getSeries() async {
-    return await fetchSeries(
-        {'limit': '10', 'titleStartsWith': widget.titleStartsWith});
-  }
+  // Future<List<Movie>> getMovies() async {
+  //   return await TMDBApi.fetchPopularMovies(1);
+  // }
 
   @override
   void initState() {
     super.initState();
-    _series = getSeries();
+    _movies = widget.getMovies(1);
   }
 
   @override
   void didUpdateWidget(covariant MovieCard oldWidget) {
     // TODO: implement didUpdateWidget
     super.didUpdateWidget(oldWidget);
-    _series = getSeries();
+    _movies = widget.getMovies(1);
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: _series,
+        future: _movies,
         builder: (context, asyncSnapshot) {
           if (!asyncSnapshot.hasData) {
             return Container(
@@ -44,12 +47,12 @@ class _MovieCardState extends State<MovieCard> {
                 child: Center(child: CircularProgressIndicator()));
           }
           final values = asyncSnapshot.data!;
-          void onTap(Result series) {
+          void onTap(Movie series) {
             Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => MovieDetailScreenWidget(
-                        key: UniqueKey(), series: series)));
+                        key: UniqueKey(), movie: series)));
           }
 
           return SizedBox(
@@ -60,13 +63,13 @@ class _MovieCardState extends State<MovieCard> {
                 scrollDirection: Axis.horizontal,
                 itemCount: values.length,
                 itemBuilder: (context, index) {
-                  final series = values[index];
+                  final movies = values[index];
 
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: InkWell(
                       onTap: () {
-                        onTap(series);
+                        onTap(movies);
                       },
                       child: Container(
                         constraints: const BoxConstraints(minHeight: 280),
@@ -82,8 +85,8 @@ class _MovieCardState extends State<MovieCard> {
                               ),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
-                                child: Image.network(
-                                    '${series.thumbnail.path}.${series.thumbnail.extension}'),
+                                child: Image.network(createImageUrl(
+                                    imageLink: movies.posterPath)),
                               ),
                             ),
                             const SizedBox(height: 10),
@@ -94,13 +97,13 @@ class _MovieCardState extends State<MovieCard> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Text(
-                                    series.title,
+                                    movies.title,
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style: const TextStyle(color: Colors.white),
                                   ),
                                   Text(
-                                    '${series.startYear}-${series.endYear}',
+                                    '(${movies.releaseDate.year})',
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style: const TextStyle(color: Colors.white),
