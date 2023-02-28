@@ -114,7 +114,7 @@ class MovieDetailScreenWidget extends StatelessWidget {
                                       ),
                                     ),
                                     Text(
-                                      "  ${nextInt.round()}",
+                                      "  ${nextInt.round()} / 5",
                                       style: normalText.copyWith(
                                         color: Colors.amber,
                                         letterSpacing: 1.2,
